@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 inc = 0.05
 k = 0.002
 xlim = 100
-mncount = 2
+mncount = 7
 
 class Metronome:
     def __init__(self, idno, initialoffset, mlist):

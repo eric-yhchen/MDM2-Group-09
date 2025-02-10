@@ -16,7 +16,7 @@ I1 = m_pendulum * L1_pendulum**2  # Inertia of first pendulum
 I2 = m_pendulum * L2_pendulum**2
 
 
-control_mode =  'NC'       #FLC(Feedback Linearization Control),NC(no control),PD(pd control)
+control_mode =  'PD'       #FLC(Feedback Linearization Control),NC(no control),PD(pd control)
 
 # Control Parameters
 Kp_PD = 1.0  # Proportional gain for PD control
