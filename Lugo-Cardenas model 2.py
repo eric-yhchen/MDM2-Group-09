@@ -17,7 +17,10 @@ I2 = m_pendulum * L2_pendulum**2
 
 
 control_mode =  ["FLC","NC","PD"]       #FLC(Feedback Linearization Control),NC(no control),PD(pd control)
-
+'''Kp_PD = 25 #this paramters shows a nice model ( better then what i was predicting,slightly better then FLC model which is kind weird  ) 
+Kd_PD = 2
+A_PD = -0.2 
+omega_PD = 1/3+np.pi'''
 # Control Parameters
 Kp_PD = 1.0  # Proportional gain for PD control
 Kd_PD = 0.05# Derivative gain for PD control
