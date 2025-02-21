@@ -45,7 +45,7 @@ x_0 = 0.0  # Initial displacement of the surface
 v_0 = 0.0  # Initial velocity of the surface
 
 # Time parameters
-T_max = 30  # Simulation duration (s)
+T_max = 100  # Simulation duration (s)
 dt = 0.01  # Time step
 
 # Cart Parameters
