@@ -15,5 +15,5 @@ Synchronisation of metronomes with feedback
 * ~~Come up with some measure of synchronicity -~~ consider velocities as well?
 * ~~Parameter sweep the simulation for time to sync~~
 * ~~Calculate energy in the system for NC and FLC - should be oscillating~~
-* Calculate the energy put in as the integral of this?
-* See how to vary the input energy and the results of this
+* ~~Calculate the energy put in as the integral of this?~~
+* See how to vary the input energy and the results of this -> needs checking
