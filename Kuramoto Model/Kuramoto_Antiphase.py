@@ -202,7 +202,7 @@ k_values = np.linspace(0.5, 4.0, 100)
 avg_sync_times_k = []
 
 # Determine the index corresponding to 6 seconds (approx).
-index_6sec = int(25.0 / dt)
+index_6sec = int(13.0 / dt)
 # Set the threshold for the overall mean theta_dot at 6 seconds.
 threshold_overall = 0.01
 
@@ -757,7 +757,8 @@ for frame in range(len(time)):
         overall_avg = np.array([avg_x, avg_y])
         d1 = np.linalg.norm(overall_avg - group1_avg)
         d2 = np.linalg.norm(overall_avg - group2_avg)
-        cond2 = (np.abs(d1 - d2) < threshold_distance)
+        # Check if d2 is within 98% to 102% of d1
+        cond2 = (d2 >= 0.98 * d1) and (d2 <= 1.02 * d1)
 
         # Only update if not locked already.
         if not data['locked']:
