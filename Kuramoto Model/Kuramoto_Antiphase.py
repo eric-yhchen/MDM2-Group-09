@@ -80,7 +80,7 @@ oscillators, = ax.plot([], [], 'ro', markersize=8, label="Oscillators")
 # Initialize connecting lines between oscillators and origin
 lines = [ax.plot([], [], 'k-', alpha=0.5)[0] for _ in range(N)]
 
-# --- NEW: Add an extra marker/line for the average position ---
+# Add an extra marker/line for the average position
 avg_oscillator, = ax.plot([], [], 'bo', markersize=10, label="Average Position")
 
 
@@ -126,11 +126,6 @@ plt.show()
 # ----------------------------------------------------
 
 
-
-
-
-
-
 # Compute theta_dot (angular velocity) using finite differences
 theta_dot = np.abs(np.gradient(theta_t, axis=0) / dt)
 
@@ -146,7 +141,7 @@ plt.legend()
 plt.grid()
 plt.show()
 
-# Define a threshold for frequency synchronization (small variation in theta_dot values)
+# Define a threshold for frequency synchronisation (small variation in theta_dot values)
 sync_threshold = 0.0005  # Adjust this value for tighter/looser synchronization detection
 
 # Find the first time step where all theta_dot values are within the threshold range
@@ -201,14 +196,14 @@ group_size_fixed = fixed_total_nodes // 2
 k_values = np.linspace(0.5, 4.0, 100)
 avg_sync_times_k = []
 
-# Determine the index corresponding to 6 seconds (approx).
-index_6sec = int(13.0 / dt)
-# Set the threshold for the overall mean theta_dot at 6 seconds.
+# Determine the index corresponding to 13 seconds (approx).
+index_13sec = int(13.0 / dt)
+# Set the threshold for the overall mean theta_dot at 13 seconds.
 threshold_overall = 0.01
 
 for current_K in k_values:
     run_sync_times = []
-    theta_dot_at_6_all_runs = []
+    theta_dot_at_13_all_runs = []
     for run in range(num_runs):
         # Generate randomized initial conditions:
         stochastic_variation = np.random.uniform(-0.75 * np.pi, 0.75 * np.pi, fixed_total_nodes)
@@ -232,11 +227,11 @@ for current_K in k_values:
                 break
 
         run_sync_times.append(sync_time)
-        # Record the average theta_dot (across nodes) at ~6 seconds
-        theta_dot_at_6_all_runs.append(np.mean(theta_dot[index_6sec]))
+        # Record the average theta_dot (across nodes) at ~13 seconds
+        theta_dot_at_13_all_runs.append(np.mean(theta_dot[index_13sec]))
 
-    # Now compute the overall mean theta_dot at 6 seconds across all runs.
-    overall_mean_theta_dot = np.mean(theta_dot_at_6_all_runs)
+    # Now compute the overall mean theta_dot at 13 seconds across all runs.
+    overall_mean_theta_dot = np.mean(theta_dot_at_13_all_runs)
     # If the overall mean is below threshold_overall, discard by setting sync time to NaN.
     if overall_mean_theta_dot < threshold_overall:
         avg_sync_times_k.append(np.nan)
@@ -305,8 +300,8 @@ K = 2.22
 group_sizes = np.arange(2, 101)  # nodes per group (so total nodes = 2 * group_size)
 avg_sync_times_group = []
 
-index_6sec = int(13.0 / dt)  # index corresponding to ~25 seconds (or your desired index)
-threshold_overall = 1e-3  # threshold for the overall mean theta_dot at 6 sec
+index_13sec = int(13.0 / dt)  # index corresponding to ~13 seconds (or your desired index)
+threshold_overall = 1e-3  # threshold for the overall mean theta_dot at 13 sec
 
 for group_size in group_sizes:
     N = 2 * group_size  # total nodes
@@ -315,7 +310,7 @@ for group_size in group_sizes:
         [base_frequency + frequency_shift] * group_size
     )
     run_sync_times = []
-    theta_dot_at_6_all_runs = []  # store mean theta_dot (across nodes) at index_6sec for each run
+    theta_dot_at_13_all_runs = []  # store mean theta_dot (across nodes) at index_13sec for each run
 
     for run in range(num_runs):
         # Generate randomized initial conditions
@@ -337,11 +332,11 @@ for group_size in group_sizes:
                 break
         run_sync_times.append(sync_time)
 
-        # Record the mean theta_dot across nodes at the given index (e.g., ~25 seconds)
-        theta_dot_at_6_all_runs.append(np.mean(theta_dot[index_6sec]))
+        # Record the mean theta_dot across nodes at the given index (e.g., ~13 seconds)
+        theta_dot_at_13_all_runs.append(np.mean(theta_dot[index_13sec]))
 
     # Compute the overall mean theta_dot at the selected index across all runs.
-    overall_mean_theta_dot = np.mean(theta_dot_at_6_all_runs)
+    overall_mean_theta_dot = np.mean(theta_dot_at_13_all_runs)
     if overall_mean_theta_dot < threshold_overall:
         # If overall mean theta_dot is below the threshold, mark this parameter value as invalid.
         avg_sync_times_group.append(np.nan)
@@ -785,7 +780,7 @@ plt.show()
 # -----------------------------
 group1_n = 1000  # 20 nodes in group 1
 group2_n = 1  # 1 node in group 2
-total_n = group1_n + group2_n  # total of 21 oscillators
+total_n = group1_n + group2_n  # total of 1001 oscillators
 
 K = 1.22  # Coupling strength
 
@@ -793,7 +788,7 @@ base_frequency = 0
 frequency_shift = 1
 
 # Define natural frequencies:
-# Group 1 gets a lower frequency; Group 2 gets a higher frequency.
+# Group 1 gets a lower frequency; Group 1001 gets a higher frequency.
 natural_frequencies = np.array(
     [base_frequency - frequency_shift] * group1_n +
     [base_frequency + frequency_shift] * group2_n
