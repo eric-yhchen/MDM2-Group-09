@@ -783,7 +783,7 @@ plt.show()
 # -----------------------------
 # Simulation parameters
 # -----------------------------
-group1_n = 20  # 20 nodes in group 1
+group1_n = 1000  # 20 nodes in group 1
 group2_n = 1  # 1 node in group 2
 total_n = group1_n + group2_n  # total of 21 oscillators
 
@@ -820,13 +820,13 @@ y = np.sin(theta_t)
 # -----------------------------
 # Setup the plot for animation
 # -----------------------------
-fig, ax = plt.subplots(figsize=(6, 6))
+fig, ax = plt.subplots(figsize=(8, 12))
 ax.set_xlim(-1.2, 1.2)
 ax.set_ylim(-1.2, 1.2)
 ax.set_aspect('equal')
 ax.set_xticks([])
 ax.set_yticks([])
-ax.set_title("Kuramoto Model: 20 vs 1 Oscillators", fontsize=12)
+ax.set_title("Kuramoto Model: 1000 vs 1 Oscillators", fontsize=27)
 
 # Draw a dashed unit circle for reference.
 circle = plt.Circle((0, 0), 1, color='gray', fill=False, linestyle='dashed')
@@ -841,14 +841,25 @@ avg_marker, = ax.plot([], [], 'bo', markersize=6, label="Average Position")
 avg_vector, = ax.plot([], [], 'b--', alpha=0.5, label="Average Vector")
 avg_path, = ax.plot([], [], 'm-', lw=1, label="Average Path")
 
-plt.legend()
 
 # -----------------------------
-# Animate the simulation
+# Animate the simulation with an extra tracer for Group 2 node
 # -----------------------------
 plt.ion()  # Turn interactive mode on
 avg_path_x = []
 avg_path_y = []
+
+# Path for the singular node (Group 2)
+group2_path_x = []
+group2_path_y = []
+
+# Create plot object for Group 2 tracer
+group2_tracer, = ax.plot([], [], 'o', color='lime', markersize=6, label="Group 2 Tracer")
+
+# Create plot object for Group 2 path
+group2_path, = ax.plot([], [], 'lime', lw=1.5, label="Group 2 Path")  # Lime green path
+
+save_times = [0, 3, 6, 9, 12, 20]
 
 for frame in range(len(time)):
     # Update oscillator positions for this frame.
@@ -867,8 +878,22 @@ for frame in range(len(time)):
     avg_path_y.append(avg_y)
     avg_path.set_data(avg_path_x, avg_path_y)
 
+    # Update the Group 2 tracer
+    group2_x = x[frame, -1]  # Last node is Group 2
+    group2_y = y[frame, -1]
+    group2_tracer.set_data([group2_x], [group2_y])
+
+    # Track Group 2 path and update path plot
+    group2_path_x.append(group2_x)
+    group2_path_y.append(group2_y)
+    group2_path.set_data(group2_path_x, group2_path_y)  # Update the lime green path
+
     plt.draw()
     plt.pause(0.01)
+
+    # Save the plot at the specified times (with a tolerance of dt/2)
+    if any(np.isclose(time[frame], t, atol=dt / 2) for t in save_times):
+        plt.savefig(f"1vs1000_{int(time[frame])}s.png")
 
 plt.ioff()  # Turn interactive mode off
 plt.show()
