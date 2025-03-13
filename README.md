@@ -16,10 +16,12 @@ Code regarding the ODE model can be found in the `ODE Model` folder.
 * `ODE_Model.ipynb` contains all the code used to investigate & visualise the ODE model, as well as the predictor training.
     - The base model code is modified from `Deprecated/Lugo-Cardenas model 2.py`
 * `4 metro.ipynb` contains code that can simulate the system with 4 metronomes (not in presentation)
+*  `masses.ipynb`  contain the code for mass variation analysis and heatmap generation to minimise sync time(not in presentation).
+*  `NC_PD_FLC.ipynb` contain the code for the 3 different control used and unused in the presentation
 
 - The `Deprecated` subfolder contains previous simulation results, as well as a some work done on the PD control (not in presentation).
 - The `Figures` subfolder contains the visual results of the ODE model.
-- The `masses.ipynb`  for mass variation analysis and heatmap generation to minimise sync time.
+
 
 ## Previous Study
 
