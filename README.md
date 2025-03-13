@@ -19,6 +19,7 @@ Code regarding the ODE model can be found in the `ODE Model` folder.
 
 - The `Deprecated` subfolder contains previous simulation results, as well as a some work done on the PD control (not in presentation).
 - The `Figures` subfolder contains the visual results of the ODE model.
+- The `masses.ipynb`  for mass variation analysis and heatmap generation to minimise sync time.
 
 ## Previous Study
 
